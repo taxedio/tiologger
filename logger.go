@@ -1,22 +1,42 @@
 package tiologger
 
 import (
+	"os"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
 
 var (
-	log *zap.Logger
+	log      *zap.Logger
+	logLevel zap.AtomicLevel
+	err      error
 )
 
 // init, initialises zap logger
 func init() {
-	var (
-		err error
-	)
+	logLevelVal := os.Getenv("LOG_LEVEL")
+	switch logLevelVal {
+	case "-1":
+		logLevel = zap.NewAtomicLevelAt(zap.DebugLevel)
+	case "0":
+		logLevel = zap.NewAtomicLevelAt(zap.InfoLevel)
+	case "1":
+		logLevel = zap.NewAtomicLevelAt(zap.WarnLevel)
+	case "2":
+		logLevel = zap.NewAtomicLevelAt(zap.ErrorLevel)
+	case "3":
+		logLevel = zap.NewAtomicLevelAt(zap.DPanicLevel)
+	case "4":
+		logLevel = zap.NewAtomicLevelAt(zap.PanicLevel)
+	case "5":
+		logLevel = zap.NewAtomicLevelAt(zap.FatalLevel)
+	default:
+		logLevel = zap.NewAtomicLevelAt(zap.ErrorLevel)
+	}
 	logConfig := zap.Config{
 		OutputPaths: []string{"stdout"},
-		Level:       zap.NewAtomicLevelAt(zap.InfoLevel),
+		Level:       logLevel,
 		Encoding:    "json",
 		EncoderConfig: zapcore.EncoderConfig{
 			LevelKey:     "level",

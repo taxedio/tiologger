@@ -98,66 +98,73 @@ func (l logger) Print(v ...interface{}) {
 // Debug, creates log entry under "debug". Requires string
 func Debug(msg string, tags ...zap.Field) {
 	log.log.Info(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Debug sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	// TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Debug sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // Info, creates log entry under "info". Requires string
 func Info(msg string, tags ...zap.Field) {
 	log.log.Info(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Info sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	// TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Info sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // Info, creates log entry under "info". Requires string
 func Warn(msg string, tags ...zap.Field) {
 	log.log.Warn(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Warn sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	// TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Warn sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // Error, creates log entry under "ERROR". Requires string and error
 func Error(msg string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("ERROR", err))
 	log.log.Error(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Error sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Error sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // Critical, creates log entry under "CRITICAL". Requires string and error
 func Critical(msg string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("CRITICAL", err))
 	log.log.Error(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Critical sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Critical sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // DPanic, creates log entry under "D-PANIC". Requires string and error
 func DPanic(msg string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("D-PANIC", err))
 	log.log.DPanic(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("DPanic sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("DPanic sync error:  "+err.Error(), tags...)
+	// }
 }
 
 // Panic, creates log entry under "PANIC". Requires string and error
 func Panic(msg string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("PANIC", err))
 	log.log.Panic(msg, tags...)
-	if err := log.log.Sync(); err != nil {
-		err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
-		// log.log.Error("Panic sync error:  "+err.Error(), tags...)
-	}
+	_ = log.log.Sync()
+	// if err := log.log.Sync(); err != nil {
+	// 	err = nil // TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
+	// 	// log.log.Error("Panic sync error:  "+err.Error(), tags...)
+	// }
 }

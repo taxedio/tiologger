@@ -9,8 +9,8 @@ import (
 	"go.uber.org/zap"
 )
 
-var (
-	regExp = `&zap\.Logger{core:\(\*zapcore\.ioCore\)\([a-zA-Z\d]{12}\), development:false, addCaller:true, onFatal:0x0, name:"", errorOutput:zapcore.writerWrapper{Writer:io.discard{}}, addStack:2, callerSkip:0, clock:zapcore.systemClock{}}`
+var (	
+	regExp = `logger\.logger{log:\(\*zap.Logger\)\([a-zA-Z\d]{12}\)}`
 )
 
 func TestGetLogger(t *testing.T) {

@@ -3,13 +3,15 @@ package tiologger
 import (
 	"errors"
 	"fmt"
+	"reflect"
 	"regexp"
 	"testing"
 
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
-var (	
+var (
 	regExp = `logger\.logger{log:\(\*zap.Logger\)\([a-zA-Z\d]{12}\)}`
 )
 
@@ -161,6 +163,59 @@ func TestPanic(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			defer func() { recover() }()
 			Panic(tt.args.msg, tt.args.err, tt.args.tags...)
+		})
+	}
+}
+
+func Test_logger_Printf(t *testing.T) {
+	type args struct {
+		format string
+		v      []interface{}
+	}
+	tests := []struct {
+		name string
+		l    logger
+		args args
+	}{
+		{"Test 1", logger{}, args{format: "", v: nil}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.l.Printf(tt.args.format, tt.args.v...)
+		})
+	}
+}
+
+func Test_logger_Print(t *testing.T) {
+	type args struct {
+		v []interface{}
+	}
+	tests := []struct {
+		name string
+		l    logger
+		args args
+	}{
+		{"Test 1", logger{}, args{v: nil}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.l.Print(tt.args.v...)
+		})
+	}
+}
+
+func Test_getLevel(t *testing.T) {
+	tests := []struct {
+		name string
+		want zapcore.Level
+	}{
+		{"test", zap.ErrorLevel},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getLevel(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getLevel() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

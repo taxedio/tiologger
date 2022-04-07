@@ -3,6 +3,7 @@ package tiologger
 import (
 	"errors"
 	"fmt"
+	"os"
 	"reflect"
 	"regexp"
 	"testing"
@@ -178,6 +179,7 @@ func Test_logger_Printf(t *testing.T) {
 		args args
 	}{
 		{"Test 1", logger{}, args{format: "", v: nil}},
+		{"Test 2", logger{}, args{format: "", v: make([]interface{}, len([]int{1, 2, 3, 4, 5}))}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -196,6 +198,7 @@ func Test_logger_Print(t *testing.T) {
 		args args
 	}{
 		{"Test 1", logger{}, args{v: nil}},
+		{"Test 2", logger{}, args{v: make([]interface{}, len([]int{1, 2, 3, 4, 5}))}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -207,14 +210,42 @@ func Test_logger_Print(t *testing.T) {
 func Test_getLevel(t *testing.T) {
 	tests := []struct {
 		name string
+		l    string
 		want zapcore.Level
 	}{
-		{"test", zap.ErrorLevel},
+		{"test -1", "-1", zap.DebugLevel},
+		{"test 0", "0", zap.InfoLevel},
+		{"test 1", "1", zap.WarnLevel},
+		{"test 2", "2", zap.ErrorLevel},
+		{"test 3", "3", zap.DPanicLevel},
+		{"test 4", "4", zap.PanicLevel},
+		{"test 5", "5", zap.FatalLevel},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			os.Setenv(envLogLevel, tt.l)
 			if got := getLevel(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("getLevel() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_getOutput(t *testing.T) {
+	tests := []struct {
+		name   string
+		output string
+		want   string
+	}{
+		{"Test Default", "", "stdout"},
+		{"Test stdout", "stdout", "stdout"},
+		{"Test stderr", "stderr", "stderr"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			os.Setenv(envLogOutput, tt.output)
+			if got := getOutput(); got != tt.want {
+				t.Errorf("getOutput() = %v, want %v", got, tt.want)
 			}
 		})
 	}

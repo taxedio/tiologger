@@ -162,7 +162,11 @@ func TestPanic(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			defer func() { recover() }()
+			defer func() {
+				if err := recover(); err != nil {
+					fmt.Println("error in recovery")
+				}
+			}()
 			Panic(tt.args.msg, tt.args.err, tt.args.tags...)
 		})
 	}

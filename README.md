@@ -1,14 +1,14 @@
 <img src="assets\taxediologolandscape.jpg" alt="drawing" width="200"/>
 
 <h1 align="center">
-  Tiologger
+  tiologger
 </h1>
 
 <h3 align="center">
   <a href="https://taxed.io">taxed.io</a>
 </h3>
 
-![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/taxedio/tiologger/main?style=for-the-badge) ![GitHub](https://img.shields.io/github/license/taxedio/iso3166?style=for-the-badge) ![GitLab Release (custom instance)](https://img.shields.io/gitlab/v/release/taxedio/tiologger?include_prereleases&style=for-the-badge) ![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline-status/taxedio/tiologger?branch=main&style=for-the-badge) ![Gitlab code coverage](https://img.shields.io/gitlab/coverage/taxedio/tiologger/main?style=for-the-badge) ![GitHub contributors](https://img.shields.io/github/contributors/taxedio/tiologger?style=for-the-badge)
+![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/taxedio/tiologger/main?style=for-the-badge) ![GitHub](https://img.shields.io/github/license/taxedio/tiologger?style=for-the-badge) ![GitLab Release (custom instance)](https://img.shields.io/gitlab/v/release/taxedio/tiologger?include_prereleases&style=for-the-badge) ![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline-status/taxedio/tiologger?branch=main&style=for-the-badge) ![Gitlab code coverage](https://img.shields.io/gitlab/coverage/taxedio/tiologger/main?style=for-the-badge) ![GitHub contributors](https://img.shields.io/github/contributors/taxedio/tiologger?style=for-the-badge)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/taxedio/tiologger)](https://goreportcard.com/report/github.com/taxedio/tiologger)
 

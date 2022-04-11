@@ -97,7 +97,7 @@ func (l logger) Print(v ...interface{}) {
 
 // Debug, creates log entry under "debug". Requires string
 func Debug(msg string, tags ...zap.Field) {
-	log.log.Info(msg, tags...)
+	log.log.Debug(msg, tags...)
 	_ = log.log.Sync()
 	// if err := log.log.Sync(); err != nil {
 	// 	// TODO: update when https://github.com/uber-go/zap/issues/1000 is fixed
